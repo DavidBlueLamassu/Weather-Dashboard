@@ -8,16 +8,17 @@ var cityArray = [];
 
 buttons();
 
-(searchButton).on("click", function(event) {
-    var city = $("#search-input").val();
-    event.preventDefault();
-    today.empty();
-    forecastHeader.empty();
-    $("#forecast").empty();
+function weatherDisplay() {
+    var city = localStorage.getItem("citySearch")
+    // event.preventDefault();
+    
     if (city === "") {
         return;
     } else {
     var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + APIKey;
+    today.empty();
+    forecastHeader.empty();
+    $("#forecast").empty();
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -80,22 +81,17 @@ buttons();
           article.append(humidFuture);
           article.css({"padding": "10px", "background-color": "rgb(3, 57, 84)", "margin-right": "20px", "color": "white", "width": "120px"})
             };
-            console.log(city);
-            console.log(cityArray);
-              cityArray.push(city);
-              console.log(cityArray);
-              localStorage.setItem("cities", JSON.stringify(cityArray));
-              buttons();
+           
       }
       )
       }
       )
     }
-  }
-)
+}
+
 
 function buttons() {
-  var cityArrayStored = JSON.parse(localStorage.getItem("cities"));
+  var cityArrayStored = JSON.parse(localStorage.getItem("pastCities3"));
   $("#history").empty();
   console.log(cityArrayStored);
   if (cityArrayStored !== null) {
@@ -106,6 +102,35 @@ function buttons() {
     var buttonMaker = $("<button>");
     buttonMaker.text(cityArray[i]);
     buttonMaker.attr("city-name", cityArray[i]);
+    buttonMaker.addClass("city-button");
     $("#history").append(buttonMaker);
   }
 }
+
+$(document).on("click", ".city-button", cityNameTest);
+
+function cityNameTest() {
+  console.log("ouch!");
+  var cityButton = $(this).attr("city-name");
+  console.log(cityButton);
+  localStorage.setItem("citySearch", cityButton);
+  weatherDisplay();
+}
+
+(searchButton).on("click", function(event) {
+  var citySearch = $("#search-input").val();
+  event.preventDefault();
+  localStorage.setItem("citySearch", citySearch);
+  weatherDisplay();
+  console.log(citySearch);
+  console.log(cityArray);
+  if (citySearch !=="") {
+    cityArray.push(citySearch);
+    console.log(cityArray);
+    localStorage.setItem("pastCities3", JSON.stringify(cityArray));
+    buttons();
+  } else {
+    return;
+  }
+    
+})
