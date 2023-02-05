@@ -6,6 +6,8 @@ var forecast = $("#forecast");
 var forecastHeader = $("#forecast-header");
 var cityArray = [];
 
+buttons();
+
 (searchButton).on("click", function(event) {
     var city = $("#search-input").val();
     event.preventDefault();
@@ -77,8 +79,13 @@ var cityArray = [];
           article.append(windFuture);
           article.append(humidFuture);
           article.css({"padding": "10px", "background-color": "rgb(3, 57, 84)", "margin-right": "20px", "color": "white", "width": "120px"})
-        };
-
+            };
+            console.log(city);
+            console.log(cityArray);
+              cityArray.push(city);
+              console.log(cityArray);
+              localStorage.setItem("cities", JSON.stringify(cityArray));
+              buttons();
       }
       )
       }
@@ -86,3 +93,19 @@ var cityArray = [];
     }
   }
 )
+
+function buttons() {
+  var cityArrayStored = JSON.parse(localStorage.getItem("cities"));
+  $("#history").empty();
+  console.log(cityArrayStored);
+  if (cityArrayStored !== null) {
+    cityArray = cityArrayStored;
+  }
+  console.log(cityArray);
+  for (var i = 0; i < cityArray.length; i++) {
+    var buttonMaker = $("<button>");
+    buttonMaker.text(cityArray[i]);
+    buttonMaker.attr("city-name", cityArray[i]);
+    $("#history").append(buttonMaker);
+  }
+}
