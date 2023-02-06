@@ -19,6 +19,8 @@ function weatherDisplay() {
     today.empty();
     forecastHeader.empty();
     $("#forecast").empty();
+    
+    //$("#search-input").placholder = "Search Again?";
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -40,17 +42,22 @@ function weatherDisplay() {
         var iconPresent = $("<img>");
         var fiveDayHeader = $("<h3>");
         cityName.text(city + " (" + datePresent + ") ");
+        cityName.css({"color": "black", "margin-bottom": "5px"});
         today.append(cityName);
         iconPresent.attr("src", "images/"+ iconNumberPresent + ".png");
+        iconPresent.css("width", "50px");
         tempPresent.text("temp: " + celsiusPresent + " °C");
+        tempPresent.css({"color": "black", "margin-top": "5px"});
         windPresent.text("wind: " + response.list[0].wind.speed + " km/h");
+        windPresent.css("color", "black");
         humidPresent.text("humidity: " + response.list[0].main.humidity + "%");
+        humidPresent.css("color", "black");
         iconPresent.attr("src", "images/"+ iconNumberPresent + ".png");
         today.append(iconPresent);
         today.append(tempPresent);
         today.append(windPresent);
         today.append(humidPresent);
-        today.css({"padding": "20px", "width": "100%", "border": "solid black 1px", "background-color": "rgb(134, 194, 246)"});
+        today.css({"padding-left": "20px", "width": "100%", "border": "solid black 1px", "background-color": "rgb(134, 194, 246)"});
         fiveDayHeader.text("5-Day Forecast:")
         forecastHeader.append(fiveDayHeader);
 
@@ -69,8 +76,11 @@ function weatherDisplay() {
           var celsiusFuture = (futureWeather.main.temp - 273.15).toFixed(2);
           var iconNumber = futureWeather.weather[0].icon;
           futureDate.text(futureDateDisplay);
+          futureDate.css("margin", "5px");
           futureIcon.attr("src", "images/"+ iconNumber + ".png");
+          futureIcon.css("width", "50px");
           tempFuture.text("Temp: " + celsiusFuture + " °C");
+          tempFuture.css("margin-top", "5px");
           windFuture.text("Wind: " + futureWeather.wind.speed + " km/h");
           humidFuture.text("Humidity: " + futureWeather.main.humidity + "%");
           forecast.append(article);
@@ -79,7 +89,8 @@ function weatherDisplay() {
           article.append(tempFuture);
           article.append(windFuture);
           article.append(humidFuture);
-          article.css({"padding": "10px", "background-color": "rgb(3, 57, 84)", "margin-right": "20px", "color": "white", "width": "120px"})
+          article.css({"padding-left": "10px", "background-color": "rgb(12, 93, 180)", "margin-right": "30px", "color": "white", 
+          "width": "150px", "border": "solid black 1px"})
             };
            
       }
@@ -103,7 +114,9 @@ function buttons() {
     buttonMaker.text(cityArray[i]);
     buttonMaker.attr("city-name", cityArray[i]);
     buttonMaker.addClass("city-button");
-    $("#history").append(buttonMaker);
+    buttonMaker.css({"background-color": "rgb(215, 208, 208)", "border": "none", "margin-top": "5px", "margin-bottom": "5px", 
+    "height": "30px", "width": "295px", "border-radius": "5px"})
+    $("#history").prepend(buttonMaker);
   }
 }
 
@@ -121,9 +134,14 @@ function cityNameTest() {
   var citySearch = $("#search-input").val();
   event.preventDefault();
   localStorage.setItem("citySearch", citySearch);
+  $("#search-input").val("");
+  //$("#search-input[type='placeholder']").value = "";
+  //$('input[type="text"]').val('');
   weatherDisplay();
   console.log(citySearch);
   console.log(cityArray);
+  
+  //$("#search=input").innerHTML = "";
   if (citySearch !=="") {
     cityArray.push(citySearch);
     console.log(cityArray);
