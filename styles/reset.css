@@ -1,7 +1,10 @@
+/*Font family for the document*/
 body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+/*Formatting for the page header; 'display: flex' allows the header text to be centered 
+vertically and horizontally*/
 header {
     background-color: rgb(4, 4, 121);
     height: 70px;
@@ -12,13 +15,28 @@ header {
     margin-bottom: 20px;
 }
 
+/*Flexbox created so that the search form and the weather display will line up
+horizontally (rather than in column). The former is held in an <aside> element; the latter
+in a <div> with id="weather"*/
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+/*Form: Padding to separate the search form from the weather display, for greater
+clarity*/
+aside {
+    padding-right: 20px;
+}
+
+/*Form: Formatting for the text header over the input element and search button*/
 #form-heading {
     font-size: 30px;
     margin-top: 0px;
     margin-bottom: 10px;
-
 }
 
+/*Form: Formatting for the input element; textbox size increased and corners rounded*/
 .form-input {
     margin-bottom: 20px;
     height: 30px;
@@ -28,6 +46,8 @@ header {
     border: solid black 1px;
 }
 
+/*Form: Formatting for the 'Search' button; size of button increased and 
+corners rounded for a continuity of style with input element*/
 #search-button {
     margin-bottom: 20px;
     height: 30px;
@@ -38,29 +58,14 @@ header {
     color: white;
 }
 
+/*Form: Formatting for the search history buttons to be introduced in 
+JavaScript. flexbox created so that buttons display in column*/
 #history {
     display: flex;
     flex-direction: column;
 }
 
-.row {
-    display: flex;
-    flex-direction: row;
-}
-
+/*Weather: Formatting for the '5-Day Forecast' element*/
 #forecast-header {
     color: black;
-}
-
-aside {
-    padding-right: 20px;
-}
-
-#today {
-    width: 100%;
-}
-
-#weather {
-    width: 90%;
-    color: rgb(215, 208, 208)
 }
