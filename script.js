@@ -7,11 +7,11 @@ var APIKey = "dcc6a03b53c3d32a95c06e7eb29d3c55";
 //A variable to hold the present time from 'Moment.js'
 var time = moment();
 
-//'querySelector' for the sectionelement that displays the weather 
+//'querySelector' for the section element that displays the weather 
 //for the present date
 var today = $("#today");
 
-//'querySelector' for the sectionelement that displays the 5-day
+//'querySelector' for the section element that displays the 5-day
 //weather forecast 
 var forecast = $("#forecast");
 
@@ -58,12 +58,12 @@ buttons();
 
 
 //Function to display present weather and 5-day forecast. This function is called either when a 
-//new city search is iniated or when a button is clicked for a previous city search name.
+//new city search is initiated or when a button is clicked for a previous city search name.
 function weatherDisplay() {
     
   //As the name for the city search is initially held in variables inside other functions 
-  //it needs to be stored in 'localStorage' to be made available for this function (owing to problems 
-  //of local scope)
+  //it needs to be stored in 'localStorage' to be made available for this function (owing to the 
+  //limitations of local scope)
   var city = localStorage.getItem("citySearch")
   
   //Constructs the URL to acquire the latitude and longitude for the city of interest. This is
@@ -123,11 +123,15 @@ function weatherDisplay() {
           var fiveDayHeader = $("<h3>");
 
           //Content of elements set using data from 'Open Weather' and 'Moment.js' or from variables
-          //representing this data.
+          //representing this data. Degree symbol copied from: "Degree symbol", Wikipedia: The Free 
+          //Encyclopedia, last viewed 7 February 2023: https://en.wikipedia.org/wiki/Degree_symbol
           cityName.text(city + " (" + datePresent + ") ");
           tempPresent.text("temp: " + celsiusPresent + " °C");
           windPresent.text("wind: " + response.list[0].wind.speed + " km/h");
           humidPresent.text("humidity: " + response.list[0].main.humidity + "%");
+          
+          //Variable for 'Open Weather's icons depicting the weather; copies of all of 'Open Weather's
+          //icons are stored as .png files in the images folder.
           iconPresent.attr("src", "images/"+ iconNumberPresent + ".png");
 
           //Formatting of the elements in the weather display
@@ -147,7 +151,7 @@ function weatherDisplay() {
           //Formatting of the "#today" element, represented by the 'today' variable
           today.css({"padding-left": "20px", "width": "100%", "border": "solid black 1px", "background-color": "rgb(134, 194, 246)"});
         
-          //Text set for the 5-Day Forecast element and appended to the "#forecast-header" element.
+          //Text set for the 5-Day Forecast header and appended to the "#forecast-header" element.
           fiveDayHeader.text("5-Day Forecast:")
           forecastHeader.append(fiveDayHeader);
 
@@ -182,19 +186,21 @@ function weatherDisplay() {
             //A variable holding a temperature value for each day converted from Kelvin to Celsius
             var celsiusFuture = (futureWeather.main.temp - 273.15).toFixed(2);
           
-            //Variable for 'Open Weather's icon depicting the weather; copies of all of 'Open Weather's
+            //Variable for 'Open Weather's icons depicting the weather; copies of all of 'Open Weather's
             //icons are stored as .png files in the images folder. These icons were copied from the 
             //"Icon List" on: "Weather Conditions", Open Weather, last viewed 7 February 2023: 
             //https://openweathermap.org/weather-conditions
             var iconNumber = futureWeather.weather[0].icon;
 
-            //The content for each of the 5-day weather display elements.
+            //The content for each of the 5-day weather display elements. Degree symbol copied from: 
+            //"Degree symbol", Wikipedia: The Free Encyclopedia, last viewed 7 February 2023: 
+            //https://en.wikipedia.org/wiki/Degree_symbol
             futureDate.text(futureDateDisplay);
             tempFuture.text("Temp: " + celsiusFuture + " °C");
             windFuture.text("Wind: " + futureWeather.wind.speed + " km/h");
             humidFuture.text("Humidity: " + futureWeather.main.humidity + "%");
           
-            //Variable for 'Open Weather's icon depicting the weather; copies of all of 'Open Weather's
+            //Variable for 'Open Weather's icons depicting the weather; copies of all of 'Open Weather's
             //icons are stored as .png files in the images folder.
             futureIcon.attr("src", "images/"+ iconNumber + ".png");
 
@@ -240,7 +246,7 @@ function oldSearchCity() {
 }
 
 
-//An even listener for the search form, activated when the search button is clicked. 
+//An event listener for the search form, activated when the search button is clicked or 'Enter' is pressed.
 (searchButton).on("click", function(event) {
   
   //Stores the value entered into the form.
@@ -254,9 +260,9 @@ function oldSearchCity() {
   //Empties the input box in anticipation of the next search.
   $("#search-input").val("");
   
-  //This conditional prevents null values being stored in the "cityArray" an the creation of empty
-  //buttons. City name search terms are pushed into the "cityArray" and the values of updated "cityArray" 
-  //are placed into "localStorage". The buttons() function is called to reprint an updated series of 
+  //This conditional prevents null values being stored in "cityArray" and the creation of empty
+  //buttons. City name search terms are pushed into "cityArray" and the values of the updated "cityArray" 
+  //variable are placed into "localStorage". The buttons() function is called to reprint an updated series of 
   //buttons from the stored city search names.
   if (citySearch !=="") {
     cityArray.push(citySearch);
