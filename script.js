@@ -68,7 +68,7 @@ function weatherDisplay() {
   
   //Constructs the URL to acquire the latitude and longitude for the city of interest. This is
   //required, rather than a city name, to obtain a 5-day forecast. 
-  var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + APIKey;
+  var queryURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + APIKey;
   
   //This condition prevents the code running any further should the search button have been clicked without
   //text having been entered.
@@ -92,7 +92,7 @@ function weatherDisplay() {
         //Latitude and longitude variables used to construct a second URL to obtain a 5-day forecast.
         var latitude = response[0].lat;
         var longitude = response[0].lon;
-        var queryURL = "http://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
+        var queryURL = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + APIKey;
       
         //ajax() method used to request 5-day weather forecast.
         $.ajax({
