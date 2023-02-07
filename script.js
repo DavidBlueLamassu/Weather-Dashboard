@@ -23,6 +23,7 @@ var forecastHeader = $("#forecast-header");
 var cityArray = [];
 
 
+
 //Function to create buttons for cities from previous searches
 function buttons() {
   
@@ -52,7 +53,9 @@ function buttons() {
   }
 }
 
+
 buttons();
+
 
 //Function to display present weather and 5-day forecast. This function is called either when a 
 //new city search is iniated or when a button is clicked for a previous city search name.
@@ -104,7 +107,9 @@ function weatherDisplay() {
           var celsiusPresent = (response.list[0].main.temp - 273.15).toFixed(2);
 
           //Variable for 'Open Weather's icon depicting the weather; copies of all of 'Open Weather's
-          //icons are stored as .png files in the images folder.
+          //icons are stored as .png files in the images folder. These icons were copied from the 
+          //"Icon List" on: "Weather Conditions", Open Weather, last viewed 7 February 2023: 
+          //https://openweathermap.org/weather-conditions
           var iconNumberPresent = response.list[0].weather[0].icon;
 
           //Variables for elements to display weather data.
@@ -178,7 +183,9 @@ function weatherDisplay() {
             var celsiusFuture = (futureWeather.main.temp - 273.15).toFixed(2);
           
             //Variable for 'Open Weather's icon depicting the weather; copies of all of 'Open Weather's
-            //icons are stored as .png files in the images folder.
+            //icons are stored as .png files in the images folder. These icons were copied from the 
+            //"Icon List" on: "Weather Conditions", Open Weather, last viewed 7 February 2023: 
+            //https://openweathermap.org/weather-conditions
             var iconNumber = futureWeather.weather[0].icon;
 
             //The content for each of the 5-day weather display elements.
@@ -216,21 +223,41 @@ function weatherDisplay() {
 }
 
 
-
-
+//An event listener for the buttons for cities from previous searches. When a button with 
+//the class ".city-button" is clicked the function oldSearchCity() is called.
 $(document).on("click", ".city-button", oldSearchCity);
 
+
+//The oldSearchCity() function. Each button created with the name of a city from a previous
+//weather search is indexed with the name of the city. This can be accessed using 'this' to 
+//recall the name assigned to the button from the saved attribute "city-name". Using the 
+//"cityButton" variable this name is placed in "localStorage" where it can be used in the 
+//weatherDisplay() function to acquire weather information for that city.
 function oldSearchCity() {
   var cityButton = $(this).attr("city-name");
   localStorage.setItem("citySearch", cityButton);
   weatherDisplay();
 }
 
+
+//An even listener for the search form, activated when the search button is clicked. 
 (searchButton).on("click", function(event) {
+  
+  //Stores the value entered into the form.
   var citySearch = $("#search-input").val();
   event.preventDefault();
+
+  //Saves the value of "citySearch" into "localStorage" where it may be used by the weatherDisplay()
+  //function, which is called below. 
   localStorage.setItem("citySearch", citySearch);
+  
+  //Empties the input box in anticipation of the next search.
   $("#search-input").val("");
+  
+  //This conditional prevents null values being stored in the "cityArray" an the creation of empty
+  //buttons. City name search terms are pushed into the "cityArray" and the values of updated "cityArray" 
+  //are placed into "localStorage". The buttons() function is called to reprint an updated series of 
+  //buttons from the stored city search names.
   if (citySearch !=="") {
     cityArray.push(citySearch);
     localStorage.setItem("pastCities3", JSON.stringify(cityArray));
@@ -238,5 +265,8 @@ function oldSearchCity() {
   } else {
     return;
   }
+
+  //The weatherDisplay() function is called to display the weather for the city name entered into
+  //the search form.
   weatherDisplay();
 })
