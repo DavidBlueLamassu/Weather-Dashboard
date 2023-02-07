@@ -59,13 +59,13 @@ corners rounded for a continuity of style with input element*/
 }
 
 /*Form: Formatting for the search history buttons to be introduced in 
-JavaScript. flexbox created so that buttons display in column*/
+JavaScript. Flexbox created so that buttons display in column*/
 #history {
     display: flex;
     flex-direction: column;
 }
 
-/*Weather: Formatting for the '5-Day Forecast' element*/
+/*Weather: Formatting for the '5-Day Forecast' header element*/
 #forecast-header {
     color: black;
 }
