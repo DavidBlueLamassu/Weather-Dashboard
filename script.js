@@ -46,7 +46,7 @@ function buttons() {
     buttonMaker.attr("city-name", cityArray[i]);
     buttonMaker.addClass("city-button");
     buttonMaker.css({"background-color": "rgb(215, 208, 208)", "border": "none", "margin-top": "5px", "margin-bottom": "5px", 
-    "height": "30px", "width": "295px", "border-radius": "5px"})
+    "height": "30px", "width": "250px", "border-radius": "5px"})
     
     //Buttons are prepended to the '#history' element so that the most recent searches appear first
     $("#history").prepend(buttonMaker);
@@ -113,7 +113,7 @@ function weatherDisplay() {
           var iconNumberPresent = response.list[0].weather[0].icon;
 
           //Variables for elements to display weather data.
-          var cityName = $("<h1>");
+          var cityName = $("<h2>");
           var tempPresent = $("<p>");
           var windPresent = $("<p>");
           var humidPresent = $("<p>");
@@ -220,8 +220,7 @@ function weatherDisplay() {
             article.append(humidFuture);
             
             //Formatting for the <article> elements (one for each day of the 5-day forecast).
-            article.css({"padding-left": "10px", "background-color": "rgb(12, 93, 180)", "margin-right": "30px", "color": "white", 
-            "width": "150px", "border": "solid black 1px", "margin-bottom": "25px"})
+            article.css({"padding-left": "10px", "background-color": "rgb(12, 93, 180)", "margin-left": "15px", "margin-right": "15px", "color": "white", "width": "150px", "border": "solid black 1px", "margin-bottom": "25px"})
           };
            
         })
