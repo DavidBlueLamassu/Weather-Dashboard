@@ -120,7 +120,7 @@ function weatherDisplay() {
           var iconPresent = $("<img>");
         
           //An element to hold header text for the 5-day weather display
-          var fiveDayHeader = $("<h3>");
+          var fiveDayHeader = $("<h4>");
 
           //Content of elements set using data from 'Open Weather' and 'Moment.js' or from variables
           //representing this data. Degree symbol copied from: "Degree symbol", Wikipedia: The Free 
@@ -151,8 +151,9 @@ function weatherDisplay() {
           //Formatting of the "#today" element, represented by the 'today' variable
           today.css({"padding-left": "20px", "width": "100%", "border": "solid black 1px", "background-color": "rgb(134, 194, 246)"});
         
-          //Text set for the 5-Day Forecast header and appended to the "#forecast-header" element.
+          //Text and formatting for the 5-Day Forecast header appended to the "#forecast-header" element.
           fiveDayHeader.text("5-Day Forecast:")
+          fiveDayHeader.css({"text-align": "center", "padding-top": "35px", "padding-bottom": "5px"});
           forecastHeader.append(fiveDayHeader);
 
           //A 'for' loop to build the 5-day forecast display. The variable 'i' begins at 1
@@ -177,7 +178,7 @@ function weatherDisplay() {
             //Elements to build the 5-day weather display. An <article> element is used to hold
             //the weather forecast for each day.
             var article = $("<article>");
-            var futureDate = $("<h3>");
+            var futureDate = $("<h5>");
             var futureIcon = $("<img>");
             var tempFuture = $("<p>");
             var windFuture = $("<p>");
@@ -217,10 +218,10 @@ function weatherDisplay() {
             article.append(tempFuture);
             article.append(windFuture);
             article.append(humidFuture);
-          
+            
             //Formatting for the <article> elements (one for each day of the 5-day forecast).
             article.css({"padding-left": "10px", "background-color": "rgb(12, 93, 180)", "margin-right": "30px", "color": "white", 
-            "width": "150px", "border": "solid black 1px"})
+            "width": "150px", "border": "solid black 1px", "margin-bottom": "25px"})
           };
            
         })
