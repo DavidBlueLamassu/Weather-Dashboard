@@ -28,7 +28,7 @@ var cityArray = [];
 function buttons() {
   
   //Recalls cities from previous searches from 'localStorage'
-  var cityArrayStored = JSON.parse(localStorage.getItem("pastCitiesSearched"));
+  var cityArrayStored = JSON.parse(localStorage.getItem("pastCitiesSearches"));
   
   //Removes previous copies of buttons to prevent duplication when new buttons are printed
   $("#history").empty();
@@ -261,12 +261,16 @@ function oldSearchCity() {
   $("#search-input").val("");
   
   //This conditional prevents null values being stored in "cityArray" and the creation of empty
-  //buttons. City name search terms are pushed into "cityArray" and the values of the updated "cityArray" 
-  //variable are placed into "localStorage". The buttons() function is called to reprint an updated series of 
-  //buttons from the stored city search names.
+  //buttons. City name search terms are pushed into "cityArray" and a second conditional limits the number
+  //of stored cities to no more than 5. This prevents the page from becoming cluttered with too many buttons.
+  //The values of the updated "cityArray" are then placed into "localStorage". The buttons() function
+  //is called to reprint an updated series of buttons from the stored city search names.
   if (citySearch !=="") {
     cityArray.push(citySearch);
-    localStorage.setItem("pastCitiesSearched", JSON.stringify(cityArray));
+    if (cityArray.length > 5) {
+      cityArray.shift();
+    }
+    localStorage.setItem("pastCitiesSearches", JSON.stringify(cityArray));
     buttons();
   } else {
     return;
