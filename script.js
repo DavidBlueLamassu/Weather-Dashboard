@@ -28,7 +28,7 @@ var cityArray = [];
 function buttons() {
   
   //Recalls cities from previous searches from 'localStorage'
-  var cityArrayStored = JSON.parse(localStorage.getItem("pastCitiesSearches"));
+  var cityArrayStored = JSON.parse(localStorage.getItem("pastCitySearches"));
   
   //Removes previous copies of buttons to prevent duplication when new buttons are printed
   $("#history").empty();
@@ -270,7 +270,7 @@ function oldSearchCity() {
     if (cityArray.length > 5) {
       cityArray.shift();
     }
-    localStorage.setItem("pastCitiesSearches", JSON.stringify(cityArray));
+    localStorage.setItem("pastCitySearches", JSON.stringify(cityArray));
     buttons();
   } else {
     return;
